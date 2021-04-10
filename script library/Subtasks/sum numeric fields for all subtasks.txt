@@ -1,0 +1,4 @@
+// Sum the estimates
+def estimate = allSubtasks.collect { Map subtask ->
+    subtask.fields."${storyPointsField}" ?: 0 
+}.sum()

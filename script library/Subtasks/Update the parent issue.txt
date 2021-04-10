@@ -1,0 +1,14 @@
+// Get the field ids
+def fields = get('/rest/api/2/field')
+        .asObject(List)
+        .body as List<Map>
+
+// Now update the parent issue
+def result = put("/rest/api/2/issue/${parentKey}")
+        .header('Content-Type', 'application/json')
+        .body([
+            fields: [
+                (storyPointsField): estimate
+            ]
+        ])
+        .asString()

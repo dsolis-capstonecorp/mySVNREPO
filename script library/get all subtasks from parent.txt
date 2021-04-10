@@ -1,0 +1,10 @@
+4:10
+//comment 2
+// Retrieve all the subtasks of this issue's parent
+def parentKey = issue.fields.parent.key
+def allSubtasks = get("/rest/api/2/search")
+        .queryString("jql", "parent=${parentKey}")
+        .queryString("fields", "parent,${storyPointsField}")
+        .asObject(Map)
+        .body
+        .issues as List<Map>
